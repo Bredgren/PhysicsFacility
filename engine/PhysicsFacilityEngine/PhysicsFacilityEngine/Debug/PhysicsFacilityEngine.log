@@ -1,0 +1,14 @@
+﻿Build started 2/11/2013 12:33:21 PM.
+     1>Project "C:\Users\brandon\Documents\Programming\games\Physics Facility\engine\PhysicsFacilityEngine\PhysicsFacilityEngine\PhysicsFacilityEngine.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external" /ZI /nologo /W3 /WX- /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D GLEW_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt physfacengine.cpp
+         physfacengine.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"C:\Users\brandon\Documents\Programming\games\Physics Facility\engine\PhysicsFacilityEngine\Debug\PhysicsFacilityEngine.lib" Box2D.lib glew32s.lib opengl32.lib /LIBPATH:"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glew" /LIBPATH:"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\Box2D" /NOLOGO Debug\physfacengine.obj
+         Debug\shader.obj
+         PhysicsFacilityEngine.vcxproj -> C:\Users\brandon\Documents\Programming\games\Physics Facility\engine\PhysicsFacilityEngine\Debug\PhysicsFacilityEngine.lib
+     1>Done Building Project "C:\Users\brandon\Documents\Programming\games\Physics Facility\engine\PhysicsFacilityEngine\PhysicsFacilityEngine\PhysicsFacilityEngine.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.29

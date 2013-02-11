@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Power">
+      <UniqueIdentifier>{fd3e5aea-530c-48d4-b85e-f991ba3f3af1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Power\Modifiers">
+      <UniqueIdentifier>{2df144e8-fa30-46d2-885e-c0de3e7ced3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Power\Generators">
+      <UniqueIdentifier>{a04f167e-4b52-4eeb-8b69-df9be0824c51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Powered">
+      <UniqueIdentifier>{8614058d-4993-4a8c-8037-1581efa48eeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Powered\Doors">
+      <UniqueIdentifier>{4ebd63ce-fdc1-4a78-b5e6-412eed296d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Powered\Wheels">
+      <UniqueIdentifier>{c4c70166-4ec9-421f-9d80-85bfd0518296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Powered\Fields">
+      <UniqueIdentifier>{b7a9ec99-f02e-41dd-becb-039dd5b591bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Powered\Springs">
+      <UniqueIdentifier>{9e875d4c-78cf-48b6-9db8-b2bb441b9662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Powered\Teleporters">
+      <UniqueIdentifier>{0fac26f5-3c2d-4426-9e87-9b75521680f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{ece2126f-f080-4c21-a381-fbdc377448f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{8de70b3c-9f32-4d31-bee8-28606711d17c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{ead25696-d2f9-4d14-975f-ce3ba2abacae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{88e3010d-052c-4eef-a24d-3c3aef810a94}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Actor\actor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="physfacengine.h" />
+    <ClInclude Include="Shaders\shader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="physfacengine.cpp" />
+    <ClCompile Include="Shaders\shader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
