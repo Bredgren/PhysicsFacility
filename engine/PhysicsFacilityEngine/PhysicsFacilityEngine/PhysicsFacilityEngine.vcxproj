@@ -57,7 +57,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>Box2D.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glew;C:\Users\brandon\Documents\Programming\games\Physics Facility\external\Box2D;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\brandon\Documents\Programming\games\Physics Facility\external\Box2D;C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glew</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -81,7 +81,7 @@
     <Lib>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalDependencies>Box2D.lib;glu32.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\brandon\Documents\Programming\games\Physics Facility\external;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\brandon\Documents\Programming\games\Physics Facility\external\Box2D;C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glew</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>

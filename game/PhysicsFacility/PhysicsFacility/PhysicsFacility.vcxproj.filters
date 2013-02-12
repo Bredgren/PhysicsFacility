@@ -30,12 +30,18 @@
     <ClInclude Include="PhysicsFacility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GLContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsFacility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GLContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
