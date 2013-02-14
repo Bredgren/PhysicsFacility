@@ -1,9 +1,15 @@
-﻿Build started 2/13/2013 7:37:00 PM.
+﻿Build started 2/13/2013 10:33:27 PM.
      1>Project "C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\PhysicsFacilityEngine\PhysicsFacilityEngine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glm-0.9.4.0\glm" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glew-1.9.0\include" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\Box2D" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /D GLEW_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\Engine\physfacengine.cpp
          physfacengine.cpp
-     1>c:\users\brandon\documents\programming\games\physics facility\physicsfacility\engine\physfacengine.cpp(50): warning C4244: 'argument' : conversion from 'int32' to 'const GLfloat', possible loss of data
+     1>c:\users\brandon\documents\programming\games\physics facility\physicsfacility\engine\physfacengine.cpp(59): warning C4244: 'argument' : conversion from 'double' to 'const GLfloat', possible loss of data
+     1>c:\users\brandon\documents\programming\games\physics facility\physicsfacility\engine\physfacengine.cpp(118): warning C4305: '+=' : truncation from 'double' to 'float32'
+     1>c:\users\brandon\documents\programming\games\physics facility\physicsfacility\engine\physfacengine.cpp(119): warning C4244: '+=' : conversion from 'double' to 'float32', possible loss of data
+     1>c:\users\brandon\documents\programming\games\physics facility\physicsfacility\engine\physfacengine.cpp(120): warning C4244: '+=' : conversion from 'double' to 'float32', possible loss of data
+     1>c:\users\brandon\documents\programming\games\physics facility\physicsfacility\engine\physfacengine.cpp(182): warning C4244: '=' : conversion from 'double' to 'float32', possible loss of data
+     1>c:\users\brandon\documents\programming\games\physics facility\physicsfacility\engine\physfacengine.cpp(183): warning C4244: '=' : conversion from 'double' to 'float32', possible loss of data
+     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\Debug\PhysicsFacilityEngine.lib" /NOLOGO Debug\physfacengine.obj
          Debug\shader.obj
@@ -12,4 +18,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.99
+Time Elapsed 00:00:01.07

@@ -54,9 +54,9 @@ class PFEngine {
   // Simulates the level for one time_step_'s worth of seconds.
   void Step();
 
-  // Draws the current state of the level. (Assumes OpenGL context?)
-  // TODO determine if this needs a parameter or just a promise
-  void Draw(/*whatever needs to be here*/);
+  // Draws the current state of the level. Assumes there is a valid
+  // OpenGL context.
+  void Draw();
   
   // Returns true when the player has completed the level. Be sure to check
   // and handle this.
@@ -88,15 +88,22 @@ class PFEngine {
    float32 time_step_;
 
    GLuint VertexArrayID;
-   GLuint programID;
    static const GLfloat g_vertex_buffer_data[];
    GLuint vertexbuffer;
 
+   // Keeps track of when we're initialized.
    bool init_;
 
    int32 width_, height_;
 
    Shader shader_;
+
+   // testing variables
+   float32 angle;
+   float32 x;
+   float32 y;
+   int32 vert;
+   int32 horiz;
 };
 
 #endif  // PHYSICSFACILICTYENGINE_PHYSFACENGINE_H_

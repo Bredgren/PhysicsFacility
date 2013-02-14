@@ -42,13 +42,23 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PHYSICSFACILITYGAME));
 
-	// Main message loop:
-	while (GetMessage(&msg, NULL, 0, 0)) {
-		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) {
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+  bool quit = false;
+  while (!quit) {
+		// check for messages
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+			// handle or dispatch messages
+			if ( msg.message == WM_QUIT ) {
+				quit = TRUE;
+			} else {
+				TranslateMessage( &msg );
+				DispatchMessage( &msg );
+			}
+		} else {
+      pfe.Step();
+      pfe.Draw();
+      SwapBuffers(glcontext.hDC);
 		}
-	}
+  }
 
 	return (int) msg.wParam;
 }
@@ -93,9 +103,12 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 
   hInst = hInstance; // Store instance handle in our global variable
 
+  RECT r = {0, 0, 1024, 768};
+  AdjustWindowRect(&r, WS_CAPTION | WS_POPUPWINDOW | WS_VISIBLE, 0);
+
   hWnd = CreateWindow(szWindowClass, szTitle, 
     WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU| WS_MINIMIZEBOX,
-    CW_USEDEFAULT, 0, 1024, 768, NULL, NULL, hInstance, NULL);
+    CW_USEDEFAULT, 0, r.right-r.left, r.bottom-r.top, NULL, NULL, hInstance, NULL);
 
   if (!hWnd) {
     return FALSE;
@@ -127,15 +140,47 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	PAINTSTRUCT ps;
-	HDC hdc;
+	//HDC hdc;
 
 	switch (message) {
-	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
-    pfe.Draw();
-    SwapBuffers(hdc);
-		EndPaint(hWnd, &ps);
-		break;
+  case WM_KEYDOWN: {
+      switch(wParam) {
+      case 'W':
+        pfe.SetActorAction(0, kMoveForward);
+        break;
+      case 'R':
+        pfe.SetActorAction(0, kMoveBackward);
+        break;
+      case 'A':
+        pfe.SetActorAction(0, kTurnLeft);
+        break;
+      case 'S':
+        pfe.SetActorAction(0, kTurnRight);
+        break;
+      default: break;
+      }
+      break;
+  }
+  case WM_KEYUP: {
+    switch(wParam) {
+    case 'W':
+    case 'R':
+      pfe.SetActorAction(0, kMoveStop);
+      break;
+    case 'A':
+    case 'S':
+      pfe.SetActorAction(0, kTurnStop);
+      break;
+    default: break;
+    }
+    break;
+  }
+  case WM_MOUSEMOVE: {
+    int x = (short)LOWORD(lParam);
+    int y = (short)HIWORD(lParam);
+    pfe.SetActorAction(0, kArmPosition, x, y);
+    break;
+  }
 	case WM_DESTROY:
     glcontext.purge();
 		PostQuitMessage(0);

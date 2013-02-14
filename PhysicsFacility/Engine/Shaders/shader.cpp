@@ -21,7 +21,8 @@ bool Shader::bind() {
 
   GLenum error = glGetError();
   if (error != GL_NO_ERROR) {
-    printf("Error binding shader! %s\n", gluErrorString(error));
+    const GLubyte *b = gluErrorString(error);
+    printf("Error binding shader! %s\n", b);
     printProgramLog(programID_);
     return false;
   }
@@ -44,30 +45,35 @@ GLuint Shader::getMVPHandle() {
 
 bool Shader::loadProgram() {
 	programID_ = glCreateProgram();
-  if (!loadShaderFromFile("../../../Engine/Shaders/transform.glvs", "../../../Engine/Shaders/color.glfs"))
+  if (!loadShaderFromFile("../../../Engine/Shaders/transform.glvs",
+                          "../../../Engine/Shaders/color.glfs"))
     return false;
   
   //Get variable locations
-  colorLocation_ = glGetAttribLocation(programID_, "color");
+  colorLocation_ = glGetUniformLocation(programID_, "color");
 	if(colorLocation_ == -1) {
 		printf("%s is not a valid glsl program variable!\n", "color");
 	}
 
-	projectionMatrixLocation_ = glGetUniformLocation(programID_, "projectionMatrix");
+	projectionMatrixLocation_ = glGetUniformLocation(programID_, 
+                                                   "projectionMatrix");
 	if(projectionMatrixLocation_ == -1) {
-		printf( "%s is not a valid glsl program variable!\n", "projectionMatrix" );
+		printf("%s is not a valid glsl program variable!\n",
+           "projectionMatrix");
 	}
 
-	modelViewMatrixLocation_ = glGetUniformLocation(programID_, "modelViewMatrix");
+	modelViewMatrixLocation_ = glGetUniformLocation(programID_, 
+                                                  "modelViewMatrix");
 	if(modelViewMatrixLocation_ == -1) {
-		printf( "%s is not a valid glsl program variable!\n", "modelViewMatrix" );
+		printf("%s is not a valid glsl program variable!\n",
+            "modelViewMatrix" );
 	}
 
 	return true;
 }
 
 void Shader::setColor(GLfloat r, GLfloat g, GLfloat b) {
-	glUniform3f(colorLocation_, r, g, b);
+	glUniform4f(colorLocation_, r, g, b, 1.0f);
 }
 
 void Shader::setProjection(glm::mat4 matrix) {
@@ -87,14 +93,17 @@ void Shader::leftMultModelView(glm::mat4 matrix) {
 }
 
 void Shader::updateProjection() {
-	glUniformMatrix4fv(projectionMatrixLocation_, 1, GL_FALSE, glm::value_ptr(projectionMatrix_));
+	glUniformMatrix4fv(projectionMatrixLocation_, 1, GL_FALSE, 
+                     glm::value_ptr(projectionMatrix_));
 }
 
 void Shader::updateModelView() {
-	glUniformMatrix4fv(modelViewMatrixLocation_, 1, GL_FALSE, glm::value_ptr(modelViewMatrix_));
+	glUniformMatrix4fv(modelViewMatrixLocation_, 1, GL_FALSE, 
+                     glm::value_ptr(modelViewMatrix_));
 }
 
-GLuint Shader::loadShaderFromFile(const char * vertex_file_path, const char * fragment_file_path) {
+GLuint Shader::loadShaderFromFile(const char * vertex_file_path, 
+                                  const char * fragment_file_path) {
 	// Create the shaders
 	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
@@ -136,7 +145,8 @@ GLuint Shader::loadShaderFromFile(const char * vertex_file_path, const char * fr
 	glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	if ( InfoLogLength > 0 ){
 		std::vector<char> VertexShaderErrorMessage(InfoLogLength+1);
-		glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
+		glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, 
+                       &VertexShaderErrorMessage[0]);
 		printf("%s\n", &VertexShaderErrorMessage[0]);
 	}
 
@@ -151,7 +161,8 @@ GLuint Shader::loadShaderFromFile(const char * vertex_file_path, const char * fr
 	glGetShaderiv(FragmentShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	if ( InfoLogLength > 0 ){
 		std::vector<char> FragmentShaderErrorMessage(InfoLogLength+1);
-		glGetShaderInfoLog(FragmentShaderID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
+		glGetShaderInfoLog(FragmentShaderID, InfoLogLength, NULL, 
+                       &FragmentShaderErrorMessage[0]);
 		printf("%s\n", &FragmentShaderErrorMessage[0]);
 	}
 
@@ -167,7 +178,8 @@ GLuint Shader::loadShaderFromFile(const char * vertex_file_path, const char * fr
 	glGetProgramiv(programID_, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	if ( InfoLogLength > 0 ){
 		std::vector<char> ProgramErrorMessage(InfoLogLength+1);
-		glGetProgramInfoLog(programID_, InfoLogLength, NULL, &ProgramErrorMessage[0]);
+		glGetProgramInfoLog(programID_, InfoLogLength, NULL, 
+                        &ProgramErrorMessage[0]);
 		printf("%s\n", &ProgramErrorMessage[0]);
 	}
 

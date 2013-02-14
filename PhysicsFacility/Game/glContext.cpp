@@ -13,46 +13,46 @@ GLContext::~GLContext(void) {
 
 void GLContext::init(HWND hWnd) {
     // remember the window handle (HWND)
-    mhWnd = hWnd;
+    hWnd_ = hWnd;
 
     // get the device context (DC)
-    mhDC = GetDC( mhWnd );
+    hDC = GetDC(hWnd_);
 
     // set the pixel format for the DC
     PIXELFORMATDESCRIPTOR pfd;
-    ZeroMemory( &pfd, sizeof( pfd ) );
-    pfd.nSize = sizeof( pfd );
+    ZeroMemory(&pfd, sizeof(pfd));
+    pfd.nSize = sizeof(pfd);
     pfd.nVersion = 1;
     pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL |
-                    PFD_DOUBLEBUFFER;
+                  PFD_DOUBLEBUFFER;
     pfd.iPixelType = PFD_TYPE_RGBA;
     pfd.cColorBits = 24;
     pfd.cDepthBits = 16;
     pfd.iLayerType = PFD_MAIN_PLANE;
-    int format = ChoosePixelFormat( mhDC, &pfd );
-    SetPixelFormat( mhDC, format, &pfd );
+    int format = ChoosePixelFormat(hDC, &pfd);
+    SetPixelFormat(hDC, format, &pfd);
 
     // create the render context (RC)
-    mhRC = wglCreateContext( mhDC );
+    hRC_ = wglCreateContext(hDC);
 
     // make it the current render context
-    wglMakeCurrent( mhDC, mhRC );
+    wglMakeCurrent(hDC, hRC_);
 }
 
 void GLContext::purge() {
-    if ( mhRC ) {
-        wglMakeCurrent( NULL, NULL );
-        wglDeleteContext( mhRC );
+    if (hRC_) {
+        wglMakeCurrent(NULL, NULL);
+        wglDeleteContext(hRC_);
     }
 
-    if ( mhWnd && mhDC )
-        ReleaseDC( mhWnd, mhDC );
+    if (hWnd_ && hDC)
+        ReleaseDC(hWnd_, hDC);
 
     reset();
 }
 
 void GLContext::reset(){
-	mhWnd = NULL;
-	mhDC = NULL;
-	mhRC = NULL;
+  hDC = NULL;
+	hWnd_ = NULL;
+	hRC_ = NULL;
 }

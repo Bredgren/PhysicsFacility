@@ -12,12 +12,13 @@ public:
 
     void purge();
 
+    HDC hDC;
+
 private:
     void reset();
 
-    HWND mhWnd;
-    HDC mhDC;
-    HGLRC mhRC;
+    HWND hWnd_;
+    HGLRC hRC_;
 
 };
 

@@ -1,3 +1,6 @@
+/*
+ * Copyright 2013 Brandon Edgren
+ */
 
 #ifndef PHYSICSFACILICTYENGINE_SHADER_HPP
 #define PHYSICSFACILICTYENGINE_SHADER_HPP
@@ -9,23 +12,20 @@
 #include <GL/glew.h>
 #include <glm.hpp>
 
-// Function for loading shaders from files.
-//GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path);
-
+// This class is for managing the shaders. Only one set of shaders is
+// used because that is all that this project needs.
 class Shader {
 	public:
     Shader();
-
     ~Shader();
 
 		bool loadProgram();
-
 		void freeProgram();
 
 		bool bind();
-
 		void unbind();
 
+    // Sets the color of the shader. Default is black.
     void setColor(GLfloat r, GLfloat g, GLfloat b);
 
 		GLuint getProgramID();
@@ -45,6 +45,7 @@ class Shader {
     GLuint loadShaderFromFile(const char * vertex_file_path,const char * fragment_file_path);
 		GLuint programID_;
 
+    // Locations of shader uniforms
     GLint colorLocation_;
 
 		glm::mat4 projectionMatrix_;
