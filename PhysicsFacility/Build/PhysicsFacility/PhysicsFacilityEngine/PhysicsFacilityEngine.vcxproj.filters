@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{7fc706c8-8b57-4bd9-83ee-4382e53fbd59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Power">
+      <UniqueIdentifier>{d1c663d2-acd8-4e75-ad4f-e60aff639925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Powered">
+      <UniqueIdentifier>{79729858-7dfb-4346-9b82-ea9211fc1751}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{b83ad9d3-5f96-4e48-95fb-329a60c50833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{c23215b1-609c-4150-9d4a-1f224e9c725e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Engine\physfacengine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Engine\Shaders\shader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Engine\physfacengine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Engine\Actor\actor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Engine\Shaders\shader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Engine\Shaders\color.glfs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\..\..\Engine\Shaders\transform.glvs">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>

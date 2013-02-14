@@ -1,0 +1,21 @@
+#version 330 core
+
+// Input vertex data, different for all executions of this shader.
+layout(location = 0) in vec2 in vec2 vertexPos2D;
+
+in vec3 color;
+
+//Transformation Matrices
+uniform mat4 projectionMatrix;
+uniform mat4 modelViewMatrix;
+
+out vec3 fragColor;
+
+void main() {
+    fragColor = color;
+
+	// Output position of the vertex, in clip space : MVP * position
+	gl_Position =  projectionMatrix * modelViewMatrix * vec4(vertexPos2D.x, vertexPos2D.y, 0.0, 1.0);
+
+}
+
