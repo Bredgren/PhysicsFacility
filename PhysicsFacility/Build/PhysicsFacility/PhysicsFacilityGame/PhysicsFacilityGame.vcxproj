@@ -84,6 +84,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Game\glContext.h" />
+    <ClInclude Include="..\..\..\Game\game_state.h" />
+    <ClInclude Include="..\..\..\Game\main_menu.h" />
     <ClInclude Include="PhysicsFacilityGame.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -91,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Game\glContext.cpp" />
+    <ClCompile Include="..\..\..\Game\main_menu.cpp" />
     <ClCompile Include="PhysicsFacilityGame.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

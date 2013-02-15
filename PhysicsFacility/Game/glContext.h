@@ -1,3 +1,6 @@
+/*
+ * Copyright 2013 Brandon Edgren
+ */
 
 #ifndef PHYSICSFACILICTYGAME_GLCONTEXT_H_
 #define PHYSICSFACILICTYGAME_GLCONTEXT_H_
@@ -8,9 +11,9 @@ public:
 
     ~GLContext();
 
-    void init(HWND hWnd);
+    void Init(HWND hWnd);
 
-    void purge();
+    void Purge();
 
     HDC hDC;
 

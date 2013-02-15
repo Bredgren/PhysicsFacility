@@ -25,7 +25,7 @@ class PFEngine {
 
 	~PFEngine();
 
-  bool init();
+  bool Init();
 
   // Given the path of the level relative to the level folder given at
   // construction, this function attempts to load and prepare the level.
@@ -75,6 +75,8 @@ class PFEngine {
 
   // Sets the time step for the next call to Step.
   void SetTimeStep(float32 time_step) { time_step_ = time_step; }
+
+  Shader *GetShader();
 
  private:
    // The folder that should holds all the levels.

@@ -23,7 +23,7 @@ PFEngine::~PFEngine() {
   }
 }
 
-bool PFEngine::init() {
+bool PFEngine::Init() {
   // Initialize GLEW
 	glewExperimental = GL_TRUE; // Needed for core profile
 	if (glewInit() != GLEW_OK) {
@@ -123,7 +123,7 @@ void PFEngine::Step() {
 void PFEngine::Draw() {
   if (current_level_ == "") return;
 
-  glClear(GL_COLOR_BUFFER_BIT);
+  //glClear(GL_COLOR_BUFFER_BIT);
 
   //shader_.setColor(0.0f, 1.0f, 1.0f);
 
@@ -185,4 +185,8 @@ void PFEngine::SetActorAction(int8 actor_id, ActorAction action,
   default:
     break;
   }
+}
+
+Shader *PFEngine::GetShader() {
+  return &shader_;
 }

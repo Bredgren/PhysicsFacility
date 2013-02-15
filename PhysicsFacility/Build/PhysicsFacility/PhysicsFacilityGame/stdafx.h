@@ -18,5 +18,8 @@
 #include <tchar.h>
 #include <stdio.h>
 
+#include "game_state.h"
 #include "glContext.h"
+#include "main_menu.h"
+
 #include <GL/glew.h>

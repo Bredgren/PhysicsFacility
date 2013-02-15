@@ -1,3 +1,7 @@
+/*
+ * Copyright 2013 Brandon Edgren
+ */
+
 #include "stdafx.h"
 
 extern GLContext glcontext = GLContext();
@@ -8,10 +12,10 @@ GLContext::GLContext(void) {
 
 
 GLContext::~GLContext(void) {
-	purge();
+	Purge();
 }
 
-void GLContext::init(HWND hWnd) {
+void GLContext::Init(HWND hWnd) {
     // remember the window handle (HWND)
     hWnd_ = hWnd;
 
@@ -39,7 +43,7 @@ void GLContext::init(HWND hWnd) {
     wglMakeCurrent(hDC, hRC_);
 }
 
-void GLContext::purge() {
+void GLContext::Purge() {
     if (hRC_) {
         wglMakeCurrent(NULL, NULL);
         wglDeleteContext(hRC_);

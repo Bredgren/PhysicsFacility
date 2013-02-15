@@ -18,7 +18,7 @@ class Shader {
 	public:
     Shader();
     ~Shader();
-
+    // TODO: capitalize methods
 		bool loadProgram();
 		void freeProgram();
 

@@ -12,7 +12,9 @@ HINSTANCE hInst;								// current instance
 TCHAR szTitle[MAX_LOADSTRING];					// The title bar text
 TCHAR szWindowClass[MAX_LOADSTRING];			// the main window class name
 
+GameState state;
 PFEngine pfe = PFEngine("fake");
+MainMenu main_menu = MainMenu();
 
 // Forward declarations of functions included in this code module:
 ATOM				MyRegisterClass(HINSTANCE hInstance);
@@ -40,6 +42,8 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		return FALSE;
 	}
 
+  state.current_state = GameState::kMainMenu;
+
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PHYSICSFACILITYGAME));
 
   bool quit = false;
@@ -54,8 +58,27 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 				DispatchMessage( &msg );
 			}
 		} else {
-      pfe.Step();
-      pfe.Draw();
+      glClear(GL_COLOR_BUFFER_BIT);
+      switch (state.current_state) {
+      case GameState::kMainMenu:
+        main_menu.Draw();
+        //break;
+      case GameState::kGame:
+        pfe.Step();
+        pfe.Draw();
+        break;
+      case GameState::kEditor:
+        break;
+      case GameState::kLevelSelect:
+        break;
+      case GameState::kCustomLevelSelect:
+        break;
+      case GameState::kQuit:
+        quit = TRUE;
+        break;
+      default:
+        break;
+      }
       SwapBuffers(glcontext.hDC);
 		}
   }
@@ -114,12 +137,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
     return FALSE;
   }
 
-  glcontext.init(hWnd);
+  glcontext.Init(hWnd);
 
-  if (!pfe.init())
+  if (!pfe.Init())
     return FALSE;
 
   if (!pfe.LoadLevel("fake"))
+    return FALSE;
+
+  if (!main_menu.Init(pfe.GetShader()))
     return FALSE;
  
   ShowWindow(hWnd, nCmdShow);
@@ -140,7 +166,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	PAINTSTRUCT ps;
-	//HDC hdc;
 
 	switch (message) {
   case WM_KEYDOWN: {
@@ -179,10 +204,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
     int x = (short)LOWORD(lParam);
     int y = (short)HIWORD(lParam);
     pfe.SetActorAction(0, kArmPosition, x, y);
+    main_menu.ProcessMouse(wParam & MK_LBUTTON, x, y);
     break;
   }
 	case WM_DESTROY:
-    glcontext.purge();
+    glcontext.Purge();
 		PostQuitMessage(0);
 		break;
 	default:
