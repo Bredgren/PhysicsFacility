@@ -56,7 +56,7 @@ bool PFEngine::Init() {
   }
 
   //Initialize projection
-	shader_.setProjection(glm::ortho<GLfloat>(0, width_*1.5, height_*1.5, 0, 0, 1));
+	shader_.setProjection(glm::ortho<GLfloat>(0, width_, height_, 0, 0, 1));
 	shader_.updateProjection();
 
 	//Initialize modelview
@@ -179,8 +179,8 @@ void PFEngine::SetActorAction(int8 actor_id, ActorAction action,
     horiz = 0;
     break;
   case kArmPosition:
-    x = display_x * 1.5;
-    y = display_y * 1.5;
+    x = display_x;
+    y = display_y;
     break;
   default:
     break;
