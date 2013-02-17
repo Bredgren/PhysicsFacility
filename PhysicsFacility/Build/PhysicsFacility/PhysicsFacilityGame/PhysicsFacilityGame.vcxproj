@@ -83,6 +83,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Game\button.h" />
     <ClInclude Include="..\..\..\Game\glContext.h" />
     <ClInclude Include="..\..\..\Game\game_state.h" />
     <ClInclude Include="..\..\..\Game\main_menu.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Game\button.cpp" />
     <ClCompile Include="..\..\..\Game\glContext.cpp" />
     <ClCompile Include="..\..\..\Game\main_menu.cpp" />
     <ClCompile Include="PhysicsFacilityGame.cpp" />

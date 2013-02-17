@@ -8,8 +8,10 @@
 #include <glm.hpp>
 
 #include <GL/glew.h>
-#include "game_state.h"
 #include <Shaders/shader.h>
+
+#include "button.h"
+#include "game_state.h"
 
 class MainMenu {
  public:
@@ -24,25 +26,30 @@ class MainMenu {
 
    // Updates the state of the buttons. Returns which game state to change
    // to, which will be kMainMenu if the user does not push a button.
-   GameState::State ProcessMouse(bool left_button, float display_x, 
-                                                   float display_y);
+   GameState::State ProcessMouse(bool left_button, GLfloat display_x, 
+                                                   GLfloat display_y);
 
    void Draw();
 
  private:
-   struct Button {
-     GLfloat x, y;
-     bool selected;
-   };
-
-   GLuint button_background_vertex_buffer_;
+   GLuint vertex_buffer_;
    Shader *shader_;
 
-   Button b1;
-   Button b2;
+   Button play;
+   Button custom;
+   Button quit;
 
    void InitializeVertexBuffers();
+
+   void SetupButton(Button button);
+   void DrawPlayButton();
+   void DrawCustomButton();
+   void DrawQuitButton();
+
    void DrawButtonBackground();
+   void DrawPlayTriangle();
+   void DrawCustomHammer();
+   void DrawQuitX();
 
    static const GLfloat button_width;
    static const GLfloat button_height;

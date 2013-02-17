@@ -62,7 +62,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
       switch (state.current_state) {
       case GameState::kMainMenu:
         main_menu.Draw();
-        //break;
+        break;
       case GameState::kGame:
         pfe.Step();
         pfe.Draw();
@@ -165,8 +165,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-	PAINTSTRUCT ps;
-
 	switch (message) {
   case WM_KEYDOWN: {
       switch(wParam) {
@@ -182,6 +180,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
       case 'S':
         pfe.SetActorAction(0, kTurnRight);
         break;
+      case VK_ESCAPE:
+        if (state.current_state == GameState::kGame)
+          state.current_state = GameState::kMainMenu;
       default: break;
       }
       break;
@@ -200,9 +201,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
     }
     break;
   }
+  case WM_LBUTTONDOWN:
+    if (state.current_state == GameState::kMainMenu) {
+      GLfloat x = (GLfloat)LOWORD(lParam);
+      GLfloat y = (GLfloat)HIWORD(lParam);
+      state.current_state = main_menu.ProcessMouse(wParam & MK_LBUTTON, x, y);
+    }
+    break;
   case WM_MOUSEMOVE: {
-    int x = (short)LOWORD(lParam);
-    int y = (short)HIWORD(lParam);
+    GLfloat x = (GLfloat)LOWORD(lParam);
+    GLfloat y = (GLfloat)HIWORD(lParam);
     pfe.SetActorAction(0, kArmPosition, x, y);
     main_menu.ProcessMouse(wParam & MK_LBUTTON, x, y);
     break;

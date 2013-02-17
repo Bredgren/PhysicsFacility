@@ -40,6 +40,8 @@ bool PFEngine::Init() {
   glDisable(GL_DEPTH_TEST);
   glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
+  //glEnable(GL_MULTISAMPLE);
+
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
@@ -115,9 +117,9 @@ void PFEngine::ResetLevel() {
 
 void PFEngine::Step() {
   if (current_level_ == "") return;
-  angle += 0.01;
-  x += 0.1 * horiz;
-  y += 0.1 * vert;
+  angle += 0.01f;
+  x += 0.1f * horiz;
+  y += 0.1f * vert;
 }
 
 void PFEngine::Draw() {
@@ -157,7 +159,7 @@ void PFEngine::SetActorAction(int8 actor_id, ActorAction action) {
 }
 
 void PFEngine::SetActorAction(int8 actor_id, ActorAction action,
-                      float32 display_x, float32 display_y) {
+                      GLfloat display_x, GLfloat display_y) {
   if (current_level_ == "") return;
   switch (action) {
   case kMoveForward:

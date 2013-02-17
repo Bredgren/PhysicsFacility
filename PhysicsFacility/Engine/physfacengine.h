@@ -71,7 +71,7 @@ class PFEngine {
   // mouse position, the coordinates of which should be given as x and y
   // relative the display.
   void SetActorAction(int8 actor_id, ActorAction action,
-                      float32 display_x, float32 display_y);
+                      GLfloat display_x, GLfloat display_y);
 
   // Sets the time step for the next call to Step.
   void SetTimeStep(float32 time_step) { time_step_ = time_step; }
@@ -96,7 +96,7 @@ class PFEngine {
    // Keeps track of when we're initialized.
    bool init_;
 
-   int32 width_, height_;
+   GLfloat width_, height_;
 
    Shader shader_;
 
