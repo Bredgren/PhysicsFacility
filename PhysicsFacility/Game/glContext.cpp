@@ -3,6 +3,7 @@
  */
 
 #include "stdafx.h"
+#include "glContext.h"
 
 extern GLContext glcontext = GLContext();
 
@@ -20,7 +21,7 @@ void GLContext::Init(HWND hWnd) {
     hWnd_ = hWnd;
 
     // get the device context (DC)
-    hDC = GetDC(hWnd_);
+    hDC_ = GetDC(hWnd_);
 
     // set the pixel format for the DC
     PIXELFORMATDESCRIPTOR pfd;
@@ -33,14 +34,14 @@ void GLContext::Init(HWND hWnd) {
     pfd.cColorBits = 24;
     pfd.cDepthBits = 16;
     pfd.iLayerType = PFD_MAIN_PLANE;
-    int format = ChoosePixelFormat(hDC, &pfd);
-    SetPixelFormat(hDC, format, &pfd);
+    int format = ChoosePixelFormat(hDC_, &pfd);
+    SetPixelFormat(hDC_, format, &pfd);
 
     // create the render context (RC)
-    hRC_ = wglCreateContext(hDC);
+    hRC_ = wglCreateContext(hDC_);
 
     // make it the current render context
-    wglMakeCurrent(hDC, hRC_);
+    wglMakeCurrent(hDC_, hRC_);
 }
 
 void GLContext::Purge() {
@@ -49,14 +50,14 @@ void GLContext::Purge() {
         wglDeleteContext(hRC_);
     }
 
-    if (hWnd_ && hDC)
-        ReleaseDC(hWnd_, hDC);
+    if (hWnd_ && hDC_)
+        ReleaseDC(hWnd_, hDC_);
 
     reset();
 }
 
 void GLContext::reset(){
-  hDC = NULL;
+  hDC_ = NULL;
 	hWnd_ = NULL;
 	hRC_ = NULL;
 }

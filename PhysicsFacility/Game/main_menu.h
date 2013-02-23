@@ -39,17 +39,15 @@ class MainMenu {
    Button custom;
    Button quit;
 
-   void InitializeVertexBuffers();
-
-   void SetupButton(Button button);
+   /*void SetupButton(Button button);
    void DrawPlayButton();
    void DrawCustomButton();
    void DrawQuitButton();
 
-   void DrawButtonBackground();
+   void DrawButtonBackground(Button button);
    void DrawPlayTriangle();
    void DrawCustomHammer();
-   void DrawQuitX();
+   void DrawQuitX();*/
 
    static const GLfloat button_width;
    static const GLfloat button_height;

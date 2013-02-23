@@ -17,7 +17,7 @@ PFEngine::PFEngine(string level_folder) :
 
 PFEngine::~PFEngine() {
   if (init_) {
-    glDeleteBuffers(1, &vertexbuffer);
+    glDeleteBuffers(1, &vertexbuffer_);
     glDeleteVertexArrays(1, &VertexArrayID);
     init_ = false;
   }
@@ -42,10 +42,6 @@ bool PFEngine::Init() {
 
   //glEnable(GL_MULTISAMPLE);
 
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
-
-  //programID = LoadShaders( "transform.glvs", "color.glfs" );
   if(!shader_.loadProgram()) {
 		fprintf(stderr, "Unable to load shader!\n");
 		return false;
@@ -65,22 +61,34 @@ bool PFEngine::Init() {
 	shader_.setModelView(glm::mat4());
 	shader_.updateModelView();
 
- // static const GLfloat g_vertex_buffer_data[] = { 
-	//	 -50.0f,  50.0f,
-	//	  50.0f,  50.0f,
-	//	  50.0f, -50.0f,
- //    -50.0f, -50.0f,
-	//};
   static const GLfloat g_vertex_buffer_data[] = { 
-		   0.0f,   0.0f,
-		  50.0f,   0.0f,
-		  50.0f, -50.0f,
-       0.0f, -50.0f,
+		 -1.0f, -1.0f,
+		 -1.0f,  1.0f,
+		  1.0f,  1.0f,
+      1.0f, -1.0f,
+      -25.0f, -25.0f,
+	    -25.0f,  25.0f,
+       25.0f,  25.0f,
+       25.0f, -25.0f,
 	};
 
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+  GLubyte indices[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+	glGenBuffers(1, &vertexbuffer_);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer_);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+  glGenBuffers(1, &IBO_);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO_);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+  glGenVertexArrays(1, &VertexArrayID);
+  glBindVertexArray(VertexArrayID);
+  shader_.enableDataPointers();
+  glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer_);
+  shader_.setVertexPointer(0, reinterpret_cast<void*>(0));
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO_);
+  glBindVertexArray(NULL);
 
   init_ = true;
   return true;
@@ -122,31 +130,70 @@ void PFEngine::Step() {
   y += 0.1f * vert;
 }
 
-void PFEngine::Draw() {
-  if (current_level_ == "") return;
-
-  //glClear(GL_COLOR_BUFFER_BIT);
-
-  //shader_.setColor(0.0f, 1.0f, 1.0f);
-
-  shader_.setModelView(glm::rotate<GLfloat>(glm::mat4(), angle, glm::vec3(0,0,1)));
+void PFEngine::DrawRect(GLfloat x, GLfloat y,
+                        GLfloat scale_x, GLfloat scale_y,
+                        GLfloat angle) {
+  shader_.setModelView(glm::scale(glm::mat4(), glm::vec3(scale_x, scale_y, 0)));
+  shader_.leftMultModelView(glm::rotate<GLfloat>(glm::mat4(), angle, glm::vec3(0,0,1)));
   shader_.leftMultModelView(glm::translate<GLfloat>(glm::mat4(), glm::vec3(x, y, 0.0f)));
 	shader_.updateModelView();
 
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glVertexAttribPointer(
-		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-		2,                  // size
-		GL_FLOAT,           // type
-		GL_FALSE,           // normalized?
-		0,                  // stride
-		(void*)0            // array buffer offset
-	);
+  glBindVertexArray(VertexArrayID);
+  glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_BYTE, NULL);
+}
 
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 4); // 3 indices starting at 0 -> 1 triangle
+void PFEngine::DrawTriangleFan(GLuint vao, GLsizei count, GLvoid *start,
+                               GLfloat x, GLfloat y,
+                               GLfloat scale_x, GLfloat scale_y,
+                               GLfloat angle) {
+  shader_.setModelView(glm::scale(glm::mat4(), glm::vec3(scale_x, scale_y, 0)));
+  shader_.leftMultModelView(glm::rotate<GLfloat>(glm::mat4(), angle, glm::vec3(0,0,1)));
+  shader_.leftMultModelView(glm::translate<GLfloat>(glm::mat4(), glm::vec3(x, y, 0.0f)));
+	shader_.updateModelView();
 
-	glDisableVertexAttribArray(0);
+  glBindVertexArray(vao);
+  glDrawElements(GL_TRIANGLE_FAN, count, GL_UNSIGNED_BYTE, start);
+}
+
+void PFEngine::Draw() {
+  if (current_level_ == "") return;
+
+  //shader_.setColor(0.0f, 1.0f, 1.0f);
+
+  DrawRect(100, 100, 50, 50, 0);
+  shader_.setColor(1.0f, 1.0f, 1.0f);
+  DrawRect(100, 100, 25, 25, 0);
+  shader_.setColor(0.0f, 0.0f, 0.0f);
+  DrawRect(150, 50, 30, 15, 45);
+
+  DrawRect(x, y, 25, 25, angle);
+
+  DrawTriangleFan(VertexArrayID, 4, (void *)4, 300, 300, 1, 1, 0);
+
+  /*shader_.setModelView(glm::rotate<GLfloat>(glm::mat4(), angle, glm::vec3(0,0,1)));
+  shader_.leftMultModelView(glm::translate<GLfloat>(glm::mat4(), glm::vec3(x, y, 0.0f)));
+	shader_.updateModelView();
+
+  glBindVertexArray(VertexArrayID);
+  glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);*/
+
+
+  //glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+
+	//glEnableVertexAttribArray(0);
+	//glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer_);
+	//glVertexAttribPointer(
+	//	0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+	//	2,                  // size
+	//	GL_FLOAT,           // type
+	//	GL_FALSE,           // normalized?
+	//	0,                  // stride
+	//	(void*)0            // array buffer offset
+	//);
+
+	//glDrawArrays(GL_TRIANGLE_FAN, 0, 4); // 3 indices starting at 0 -> 1 triangle
+
+	//glDisableVertexAttribArray(0);
 }
   
 bool PFEngine::IsLevelComplete() {
@@ -180,10 +227,16 @@ void PFEngine::SetActorAction(int8 actor_id, ActorAction action,
   case kTurnStop:
     horiz = 0;
     break;
-  case kArmPosition:
-    x = display_x;
-    y = display_y;
+  case kArmPosition: {
+    glm::vec2 mouse = glm::vec2(display_x, display_y);
+    glm::vec2 box = glm::vec2(x, y);
+    glm::vec2 dir = mouse - box;
+    size_t length = dir.length();
+    dir = glm::normalize(dir);
+    x += dir.x * length/10;
+    y += dir.y * length/10;
     break;
+  }
   default:
     break;
   }

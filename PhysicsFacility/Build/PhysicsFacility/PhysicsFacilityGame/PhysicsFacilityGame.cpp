@@ -46,18 +46,21 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PHYSICSFACILITYGAME));
 
-  bool quit = false;
-  while (!quit) {
+  while (1) {
 		// check for messages
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
 			// handle or dispatch messages
 			if ( msg.message == WM_QUIT ) {
-				quit = TRUE;
+        break;
 			} else {
 				TranslateMessage( &msg );
 				DispatchMessage( &msg );
 			}
 		} else {
+      POINT p;
+      if (GetCursorPos(&p) && ScreenToClient(glcontext.getHWND(), &p))
+        pfe.SetActorAction(0, kArmPosition, p.x, p.y);
+
       glClear(GL_COLOR_BUFFER_BIT);
       switch (state.current_state) {
       case GameState::kMainMenu:
@@ -74,12 +77,13 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
       case GameState::kCustomLevelSelect:
         break;
       case GameState::kQuit:
-        quit = TRUE;
+        glcontext.Purge();
+        PostQuitMessage(0);
         break;
       default:
         break;
       }
-      SwapBuffers(glcontext.hDC);
+      SwapBuffers(glcontext.getHDC());
 		}
   }
 
@@ -130,7 +134,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
   AdjustWindowRect(&r, WS_CAPTION | WS_POPUPWINDOW | WS_VISIBLE, 0);
 
   hWnd = CreateWindow(szWindowClass, szTitle, 
-    WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU| WS_MINIMIZEBOX,
+    WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
     CW_USEDEFAULT, 0, r.right-r.left, r.bottom-r.top, NULL, NULL, hInstance, NULL);
 
   if (!hWnd) {
@@ -147,6 +151,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 
   if (!main_menu.Init(pfe.GetShader()))
     return FALSE;
+
+  media.LoadMedia(pfe.GetShader());
  
   ShowWindow(hWnd, nCmdShow);
   UpdateWindow(hWnd);
@@ -181,7 +187,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
         pfe.SetActorAction(0, kTurnRight);
         break;
       case VK_ESCAPE:
-        if (state.current_state == GameState::kGame)
+        if (state.current_state == GameState::kGame ||
+            state.current_state == GameState::kCustomLevelSelect ||
+            state.current_state == GameState::kLevelSelect)
           state.current_state = GameState::kMainMenu;
       default: break;
       }
@@ -211,7 +219,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
   case WM_MOUSEMOVE: {
     GLfloat x = (GLfloat)LOWORD(lParam);
     GLfloat y = (GLfloat)HIWORD(lParam);
-    pfe.SetActorAction(0, kArmPosition, x, y);
+    //pfe.SetActorAction(0, kArmPosition, x, y);
     main_menu.ProcessMouse(wParam & MK_LBUTTON, x, y);
     break;
   }

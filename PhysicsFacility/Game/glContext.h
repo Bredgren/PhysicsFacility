@@ -15,11 +15,13 @@ public:
 
     void Purge();
 
-    HDC hDC;
+    HDC getHDC() { return hDC_; }
+    HWND getHWND() { return hWnd_; }
 
 private:
     void reset();
 
+    HDC hDC_;
     HWND hWnd_;
     HGLRC hRC_;
 

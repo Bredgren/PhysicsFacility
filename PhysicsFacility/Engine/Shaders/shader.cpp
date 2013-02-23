@@ -39,9 +39,9 @@ GLuint Shader::getProgramID() {
   return programID_;
 }
 
-GLuint Shader::getMVPHandle() {
-  return glGetUniformLocation(programID_, "MVP");
-}
+//GLuint Shader::getMVPHandle() {
+//  return glGetUniformLocation(programID_, "MVP");
+//}
 
 bool Shader::loadProgram() {
 	programID_ = glCreateProgram();
@@ -50,6 +50,11 @@ bool Shader::loadProgram() {
     return false;
   
   //Get variable locations
+  vertexPosLocation_ = glGetAttribLocation(programID_, "vertexPos2D");
+	if(vertexPosLocation_ == -1) {
+		printf("%s is not a valid glsl program variable!\n", "vertexPos2D");
+	}
+
   colorLocation_ = glGetUniformLocation(programID_, "color");
 	if(colorLocation_ == -1) {
 		printf("%s is not a valid glsl program variable!\n", "color");
@@ -72,8 +77,21 @@ bool Shader::loadProgram() {
 	return true;
 }
 
+void Shader::enableDataPointers() {
+  glEnableVertexAttribArray(vertexPosLocation_);
+}
+
+void Shader::disableDataPointers() {
+  //glDisableVertexAttribArray(colorLocation_);
+  glDisableVertexAttribArray(vertexPosLocation_);
+}
+
+void Shader::setVertexPointer(GLsizei stride, const GLvoid *data) {
+  glVertexAttribPointer(vertexPosLocation_, 2, GL_FLOAT, GL_FALSE, stride, data);
+}
+
 void Shader::setColor(GLfloat r, GLfloat g, GLfloat b) {
-	glUniform4f(colorLocation_, r, g, b, 1.0f);
+	glUniform3f(colorLocation_, r, g, b);
 }
 
 void Shader::setProjection(glm::mat4 matrix) {

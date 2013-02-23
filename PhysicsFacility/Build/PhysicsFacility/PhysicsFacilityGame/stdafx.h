@@ -21,5 +21,6 @@
 #include "game_state.h"
 #include "glContext.h"
 #include "main_menu.h"
+#include "media.h"
 
 #include <GL/glew.h>

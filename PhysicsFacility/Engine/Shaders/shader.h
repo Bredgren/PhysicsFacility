@@ -25,11 +25,15 @@ class Shader {
 		bool bind();
 		void unbind();
 
+		GLuint getProgramID();
+    //GLuint getMVPHandle();
+
+    void enableDataPointers();
+    void disableDataPointers();
+
+    void setVertexPointer(GLsizei stride, const GLvoid *data);
     // Sets the color of the shader. Default is black.
     void setColor(GLfloat r, GLfloat g, GLfloat b);
-
-		GLuint getProgramID();
-    GLuint getMVPHandle();
 
     void setProjection(glm::mat4 matrix);
 		void setModelView(glm::mat4 matrix);
@@ -37,6 +41,7 @@ class Shader {
 		void leftMultModelView(glm::mat4 matrix);
 		void updateProjection();
 		void updateModelView();
+
 
 	protected:
 		void printProgramLog(GLuint program);
@@ -46,6 +51,7 @@ class Shader {
 		GLuint programID_;
 
     // Locations of shader uniforms
+    GLint vertexPosLocation_;
     GLint colorLocation_;
 
 		glm::mat4 projectionMatrix_;

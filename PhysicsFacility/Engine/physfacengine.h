@@ -78,6 +78,15 @@ class PFEngine {
 
   Shader *GetShader();
 
+  void DrawRect(GLfloat x, GLfloat y,
+                GLfloat scale_x, GLfloat scale_y,
+                GLfloat angle);
+
+  void PFEngine::DrawTriangleFan(GLuint vao, GLsizei count, GLvoid *start,
+                               GLfloat x, GLfloat y,
+                               GLfloat scale_x, GLfloat scale_y,
+                               GLfloat angle);
+
  private:
    // The folder that should holds all the levels.
    string level_folder_;
@@ -90,8 +99,9 @@ class PFEngine {
    float32 time_step_;
 
    GLuint VertexArrayID;
+   GLuint IBO_;
    static const GLfloat g_vertex_buffer_data[];
-   GLuint vertexbuffer;
+   GLuint vertexbuffer_;
 
    // Keeps track of when we're initialized.
    bool init_;

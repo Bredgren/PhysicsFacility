@@ -1,7 +1,7 @@
 #version 330 core
 
 // Input vertex data, different for all executions of this shader.
-layout(location = 0) in vec2 vertexPos2D;
+in vec2 vertexPos2D;
 
 //Transformation Matrices
 uniform mat4 projectionMatrix;

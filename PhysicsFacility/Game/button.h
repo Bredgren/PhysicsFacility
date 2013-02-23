@@ -9,12 +9,10 @@
 
 class Button {
  public:
-   // Note that width and height should actually be half of the actual
-   // width and height of the button.
    Button(GLfloat x, GLfloat y, GLfloat width, GLfloat height) :
-     x_(x), y_(y), width_(width), height_(height) {}
+     x_(x), y_(y), width_(width/2.0f), height_(height/2.0f) {}
 
-   ~Button() {}
+   virtual ~Button() {}
 
    GLfloat getX() { return x_; }
    GLfloat getY() { return y_; }
