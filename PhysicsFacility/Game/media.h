@@ -17,10 +17,10 @@ class Media {
 
   enum Images {
     kRectBlack, kRectWhite,
+    kTriangleBlack, kTriangleWhite,
     //kOval,
 
     kPlayButton, kCustomButton, kQuitButton,
-    kPlayTriangle, kCustomHammer, kQuitX,
 
     kLevelButtonBackground,
 
@@ -43,6 +43,7 @@ class Media {
   Shader *shader_;
   GLuint vbo_;
   void *unit_square;
+  void *unit_triangle;
 };
 
 extern Media media;

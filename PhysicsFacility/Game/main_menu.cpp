@@ -5,13 +5,13 @@
 #include "main_menu.h"
 #include "media.h"
 
-const GLfloat MainMenu::button_width = 64.0f;
-const GLfloat MainMenu::button_height = 32.0f;
+const GLfloat MainMenu::button_width  = 86.0f;
+const GLfloat MainMenu::button_height = 43.0f;
 
 MainMenu::MainMenu() :
-  play(42.0f, 26.0f, button_width, button_height),
-  custom(42.0f, 68.0f, button_width, button_height),
-  quit(42.0f, 110.0f, button_width, button_height) {
+  play(button_width * 0.5 + 10, button_height * 0.5 + 10, button_width, button_height),
+  custom(button_width * 0.5 + 10, button_height * 1.5 + 20, button_width, button_height),
+  quit(button_width * 0.5 + 10, button_height * 2.5 + 30, button_width, button_height) {
 }
 
 MainMenu::~MainMenu() {
@@ -55,68 +55,4 @@ void MainMenu::Draw() {
   media.DrawImage(media.kQuitButton, quit.getX(), quit.getY(),
                   button_width, button_height,
                   quit.isSelected() ? 10.0f : 0.0f);
-
-  media.DrawImage(media.kRectBlack, 100, 50, 20, 20);
-  media.DrawImage(media.kRectWhite, 100, 50, 10, 10);
-  //SetupButton(play);
-  //DrawPlayButton();
-  //shader_->setColor(1.0f, 0.0f, 0.0f);
-  //media.DrawImage(media.kRect, 50, 50, 10, 10, 0);
-
-  //SetupButton(custom);
-  //DrawCustomButton();
-
-  //SetupButton(quit);
-  //DrawQuitButton();
 }
-
-//void MainMenu::SetupButton(Button button) {
-//  GLfloat angle = 0;
-//  if (button.isSelected()) angle = 10.0f;
-//  shader_->setModelView(glm::rotate<GLfloat>(glm::mat4(), 
-//                        angle, glm::vec3(0,0,1)));
-//  shader_->leftMultModelView(glm::translate<GLfloat>(
-//           glm::mat4(), glm::vec3(button.getX(), button.getY(), 0.0f)));
-//	shader_->updateModelView();
-//}
-//
-//void MainMenu::DrawPlayButton() {
-//	DrawButtonBackground(play);
-//  //shader_->setColor(1.0f, 0.0f, 0.0f);
-//  //DrawPlayTriangle();
-//}
-//
-//void MainMenu::DrawCustomButton() {
-//	DrawButtonBackground(custom);
-//  shader_->setColor(1.0f, 1.0f, 1.0f);
-//  DrawCustomHammer();
-//  shader_->setColor(0.0f, 0.0f, 0.0f);
-//}
-//
-//void MainMenu::DrawQuitButton() {
-//	DrawButtonBackground(quit);
-//  shader_->setColor(1.0f, 1.0f, 1.0f);
-//  DrawQuitX();
-//  shader_->setColor(0.0f, 0.0f, 0.0f);
-//}
-//
-//void MainMenu::DrawButtonBackground(Button button) {
-//  shader_->setColor(0.0f, 0.0f, 0.0f);
-//  media.DrawImage(media.kRect, button.getX(), button.getY(),
-//                  button_width, button_height,
-//                  button.isSelected() ? 10.0f : 0.0f);
-//}
-//
-//void MainMenu::DrawPlayTriangle() {
-//  shader_->setColor(1.0f, 1.0f, 1.0f);
-//  media.DrawImage(media.kRect, play.getX(), play.getY(),
-//                  button_width, button_height,
-//                  play.isSelected() ? 10.0f : 0.0f);
-//}
-//
-//void MainMenu::DrawCustomHammer() {
-//
-//}
-//void MainMenu::DrawQuitX() {
-//
-//}

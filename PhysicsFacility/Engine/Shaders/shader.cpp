@@ -102,6 +102,10 @@ void Shader::setModelView(glm::mat4 matrix) {
 	modelViewMatrix_ = matrix;
 }
 
+glm::mat4 Shader::getModelView() {
+  return modelViewMatrix_;
+}
+
 void Shader::leftMultProjection(glm::mat4 matrix) {
 	projectionMatrix_ = matrix * projectionMatrix_;
 }

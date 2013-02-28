@@ -37,6 +37,7 @@ class Shader {
 
     void setProjection(glm::mat4 matrix);
 		void setModelView(glm::mat4 matrix);
+    glm::mat4 getModelView();
 		void leftMultProjection(glm::mat4 matrix);
 		void leftMultModelView(glm::mat4 matrix);
 		void updateProjection();
