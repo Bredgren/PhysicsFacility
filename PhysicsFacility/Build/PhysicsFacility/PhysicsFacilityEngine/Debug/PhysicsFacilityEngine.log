@@ -1,17 +1,16 @@
-﻿Build started 2/27/2013 9:00:45 PM.
-     1>Project "C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\PhysicsFacilityEngine\PhysicsFacilityEngine.vcxproj" on node 2 (Build target(s)).
+﻿Build started 3/15/2013 5:54:07 PM.
+     1>Project "C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\PhysicsFacilityEngine\PhysicsFacilityEngine.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glm-0.9.4.0\glm" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glew-1.9.0\include" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\Box2D" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /D GLEW_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\Engine\Shaders\shader.cpp ..\..\..\Engine\physfacengine.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glm-0.9.4.0\glm" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glew-1.9.0\include" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\Box2D" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /D GLEW_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\Engine\physfacengine.cpp ..\..\..\Engine\Shaders\shader.cpp
          shader.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
          physfacengine.cpp
+         Generating Code...
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\Debug\PhysicsFacilityEngine.lib" /NOLOGO Debug\physfacengine.obj
          Debug\shader.obj
          PhysicsFacilityEngine.vcxproj -> C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\Debug\PhysicsFacilityEngine.lib
-     1>Done Building Project "C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\PhysicsFacilityEngine\PhysicsFacilityEngine.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\PhysicsFacilityEngine\PhysicsFacilityEngine.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.99
+Time Elapsed 00:00:01.87

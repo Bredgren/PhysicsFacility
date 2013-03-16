@@ -28,7 +28,6 @@ class MainMenu {
    void Draw();
 
  private:
-   GLuint vertex_buffer_;
    Shader *shader_;
 
    Button play;

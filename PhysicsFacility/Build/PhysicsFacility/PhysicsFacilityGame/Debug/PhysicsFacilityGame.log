@@ -1,9 +1,9 @@
-﻿Build started 2/27/2013 10:04:39 PM.
+﻿Build started 3/15/2013 9:05:49 PM.
      1>Project "C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\PhysicsFacilityGame\PhysicsFacilityGame.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glm-0.9.4.0\glm" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glew-1.9.0\include" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\Box2D" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Engine" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Game" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D GLEW_STATIC /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\PhysicsFacilityGame.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\Game\main_menu.cpp
-         main_menu.cpp
-     1>c:\users\brandon\documents\programming\games\physics facility\physicsfacility\game\main_menu.cpp(14): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glm-0.9.4.0\glm" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glew-1.9.0\include" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\Box2D" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Engine" /I"C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Game" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D GLEW_STATIC /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\PhysicsFacilityGame.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\Game\media.cpp
+         media.cpp
+     1>c:\users\brandon\documents\programming\games\physics facility\physicsfacility\game\media.cpp(147): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\Debug\PhysicsFacilityGame.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\Debug" /LIBPATH:"C:\Users\brandon\Documents\Programming\games\Physics Facility\external\glew-1.9.0\lib" glew32s.lib glu32.lib opengl32.lib PhysicsFacilityEngine.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\Debug\PhysicsFacilityGame.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\Debug\PhysicsFacilityGame.lib" /MACHINE:X86 Debug\PhysicsFacilityGame.res
          Debug\button.obj
@@ -14,9 +14,11 @@
          Debug\media.obj
          Debug\PhysicsFacilityGame.obj
          Debug\stdafx.obj
+     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\Debug\vc100.pdb'; linking object as if no debug info
          PhysicsFacilityGame.vcxproj -> C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\Debug\PhysicsFacilityGame.exe
      1>Done Building Project "C:\Users\brandon\Documents\Programming\games\Physics Facility\PhysicsFacility\Build\PhysicsFacility\PhysicsFacilityGame\PhysicsFacilityGame.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.53
+Time Elapsed 00:00:00.63

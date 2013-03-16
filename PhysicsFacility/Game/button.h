@@ -10,13 +10,13 @@
 class Button {
  public:
    Button(GLfloat x, GLfloat y, GLfloat width, GLfloat height) :
-     x_(x), y_(y), width_(width/2.0f), height_(height/2.0f) {}
+     x_(x), y_(y), width_(width/2.0f), height_(height/2.0f), selected_(false) {}
 
    virtual ~Button() {}
 
-   GLfloat getX() { return x_; }
-   GLfloat getY() { return y_; }
-   bool isSelected() { return selected_; }
+   GLfloat getX() const { return x_; }
+   GLfloat getY() const { return y_; }
+   bool isSelected() const { return selected_; }
 
    void ProcessMouse(GLfloat display_x, GLfloat display_y);
 

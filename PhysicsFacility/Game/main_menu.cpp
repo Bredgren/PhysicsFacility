@@ -15,7 +15,6 @@ MainMenu::MainMenu() :
 }
 
 MainMenu::~MainMenu() {
-    glDeleteBuffers(1, &vertex_buffer_);
 }
 
 bool MainMenu::Init(Shader *shader) {

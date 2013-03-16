@@ -15,6 +15,7 @@ TCHAR szWindowClass[MAX_LOADSTRING];			// the main window class name
 GameState state;
 PFEngine pfe = PFEngine("fake");
 MainMenu main_menu = MainMenu();
+LevelSelect level_menu = LevelSelect();
 
 // Forward declarations of functions included in this code module:
 ATOM				MyRegisterClass(HINSTANCE hInstance);
@@ -73,6 +74,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
       case GameState::kEditor:
         break;
       case GameState::kLevelSelect:
+        level_menu.Draw();
         break;
       case GameState::kCustomLevelSelect:
         break;
@@ -152,6 +154,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
   if (!main_menu.Init(pfe.GetShader()))
     return FALSE;
 
+  if (!level_menu.Init(pfe.GetShader()))
+    return FALSE;
+
   media.LoadMedia(pfe.GetShader());
  
   ShowWindow(hWnd, nCmdShow);
@@ -171,7 +176,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-	switch (message) {
+	GLfloat x = (GLfloat)LOWORD(lParam);
+  GLfloat y = (GLfloat)HIWORD(lParam);
+  switch (message) {
   case WM_KEYDOWN: {
       switch(wParam) {
       case 'W':
@@ -210,17 +217,45 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
     break;
   }
   case WM_LBUTTONDOWN:
-    if (state.current_state == GameState::kMainMenu) {
-      GLfloat x = (GLfloat)LOWORD(lParam);
-      GLfloat y = (GLfloat)HIWORD(lParam);
+    switch (state.current_state) {
+    case GameState::kMainMenu:  
       state.current_state = main_menu.ProcessMouse(wParam & MK_LBUTTON, x, y);
+      break;
+    case GameState::kGame:
+      break;
+    case GameState::kEditor:
+      break;
+    case GameState::kLevelSelect:
+      state.current_state = level_menu.ProcessMouse(wParam & MK_LBUTTON, x, y);
+      break;
+    case GameState::kCustomLevelSelect:
+      break;
+    case GameState::kQuit:
+      break;
+    default:
+      break;
     }
     break;
   case WM_MOUSEMOVE: {
-    GLfloat x = (GLfloat)LOWORD(lParam);
-    GLfloat y = (GLfloat)HIWORD(lParam);
-    //pfe.SetActorAction(0, kArmPosition, x, y);
-    main_menu.ProcessMouse(wParam & MK_LBUTTON, x, y);
+    switch (state.current_state) {
+    case GameState::kMainMenu:  
+      main_menu.ProcessMouse(wParam & MK_LBUTTON, x, y);
+      break;
+    case GameState::kGame:
+      pfe.SetActorAction(0, kArmPosition, x, y);
+      break;
+    case GameState::kEditor:
+      break;
+    case GameState::kLevelSelect:
+      level_menu.ProcessMouse(wParam & MK_LBUTTON, x, y);
+      break;
+    case GameState::kCustomLevelSelect:
+      break;
+    case GameState::kQuit:
+      break;
+    default:
+      break;
+    }
     break;
   }
 	case WM_DESTROY:
