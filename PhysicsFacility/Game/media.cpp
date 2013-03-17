@@ -2,6 +2,8 @@
  * Copyright 2013 Brandon Edgren
  */
 
+#include <vector>
+
 #include "stdafx.h"
 #include "media.h"
 
@@ -144,12 +146,12 @@ void Media::DrawImage(Images image, GLfloat x, GLfloat y,
   case kLevelButtonUnlock:
     DrawImage(kRectBlack, x, y, scale_x, scale_y, angle);
     DrawImage(kRectWhite, x, y, scale_x * 0.9f, scale_y * 0.9f, angle);
-    DrawNumberBlack(1, x, y, scale_y * 0.5, angle);
+    DrawNumberBlack(num, x, y, scale_y * 0.5, angle);
     break;
   case kLevelButtonLock:
     DrawImage(kRectWhite, x, y, scale_x, scale_y, angle);
     DrawImage(kRectBlack, x, y, scale_x * 0.9f, scale_y * 0.9f, angle);
-    DrawNumberWhite(1, x, y - 0.25f * scale_y, scale_y * 0.3f, angle);
+    DrawNumberWhite(num, x, y - 0.25f * scale_y, scale_y * 0.3f, angle);
     // Draw lock
     DrawImage(kRectWhite, x, y + 0.25f * scale_y, scale_x * 0.22f, scale_y * 0.18f, angle);
     DrawImage(kRectWhite, x, y + 0.1f * scale_y, scale_x * 0.18f, scale_y * 0.12f, angle);
@@ -191,10 +193,25 @@ void Media::DrawImage(Images image, GLfloat x, GLfloat y) {
 
 void Media::DrawNumber(int num, GLfloat x, GLfloat y, GLfloat scale,
                        GLfloat angle, bool black) {
-  if (black)
-    Draw0to9Black(num, x, y, scale, angle);
-  else
-    Draw0to9White(num, x, y, scale, angle);
+  std::vector<int> digits;
+
+  do {
+    digits.push_back(num % 10);
+    num /= 10;
+  } while (num > 0);
+
+  GLfloat gap = scale * 0.1f;
+  GLfloat width = (digits.size() - 1) * (scale * 0.5f + gap);
+  GLfloat rad = angle * 0.01745f;
+  for (int i = 0; i < digits.size(); ++i) {
+    GLfloat hyp = width - (width / 2) - i * (scale * 0.5f + gap);
+    GLfloat xpos = x + hyp * cos(rad);
+    GLfloat ypos = y + hyp * sin(rad);
+    if (black)
+      Draw0to9Black(digits[i], xpos, ypos, scale, angle);
+    else
+      Draw0to9White(digits[i], xpos, ypos, scale, angle);
+  }
 }
 
 void Media::DrawNumberBlack(int num, GLfloat x, GLfloat y, 
@@ -216,39 +233,58 @@ void Media::Draw0to9(int num, GLfloat x, GLfloat y, GLfloat scale,
   else
     DrawImage(kRectWhite, x, y, width, height, angle);
 
-  switch (num) {
-  case 0:
-    if (black)
-      DrawImage(kRectWhite, x, y, width * 0.5f, height * 0.6f, angle);
-    else
-      DrawImage(kRectBlack, x, y, width * 0.5f, height * 0.6f, angle);
-    break;
-  case 1:
-    if (black)
-      DrawImage(kRectWhite, x - width * 0.3f, y, width * 0.6f, height, angle);
-    else
-      DrawImage(kRectBlack, x - width * 0.3f, y, width * 0.6f, height, angle);
-    break;
-  case 2:
-    break;
-  case 3:
-    break;
-  case 4:
-    break;
-  case 5:
-    break;
-  case 6:
-    break;
-  case 7:
-    break;
-  case 8:
-    break;
-  case 9:
-    break;
-  default:
-    break;
+  float rad = angle * 0.01745f;
+
+  if (num == 0) {
+    DrawNumberBlock(0, 0, x, y, width * 0.2f, height * 0.6f, angle, 1, black);
   }
-}
+
+  if (num == 1) {
+    DrawNumberBlock(width * 0.3f, 0, x, y, width * 0.8f, height, angle, 2, black);
+  }
+
+  if (num == 2) {
+    DrawNumberBlock(width * 0.2f, height * 0.2f, x, y,
+                    width * 0.6f, height * 0.2f, angle, 4, black);
+  }
+
+  if (num == 2 || num == 3) {
+    DrawNumberBlock(width * 0.2f, height * 0.2f, x, y,
+                    width * 0.6f, height * 0.2f, angle, 2, black);
+  }
+
+  if (num == 3 || num == 5 || num == 9) {
+    DrawNumberBlock(width * 0.2f, height * 0.2f, x, y,
+                    width * 0.6f, height * 0.2f, angle, 3, black);
+  }
+
+  if (num == 4) {
+    DrawNumberBlock(0, height * 0.3f, x, y,
+                    width * 0.1f, height * 0.4f, angle, 2, black);
+    DrawNumberBlock(width * 0.2f, height * 0.3f, x, y,
+                    width * 0.6f, height * 0.4f, angle, 3, black);
+  }
+
+  if (num == 5 || num == 6) {
+    DrawNumberBlock(width * 0.2f, height * 0.2f, x, y,
+                    width * 0.6f, height * 0.2f, angle, 1, black);
+  }
+
+  if (num == 6 || num == 8) {
+    DrawNumberBlock(0, height * 0.2f, x, y,
+                    width * 0.2f, height * 0.2f, angle, 3, black);
+  }
+
+  if (num == 7) {
+    DrawNumberBlock(width * 0.2f, height * 0.1f, x, y,
+                    width * 0.6f, height * 0.8f, angle, 3, black);
+  }
+
+  if (num == 8 || num == 9) {
+    DrawNumberBlock(0, height * 0.2f, x, y,
+                    width * 0.2f, height * 0.2f, angle, 2, black);
+  }
+ }
 
 void Media::Draw0to9Black(int num, GLfloat x, GLfloat y, 
                      GLfloat scale, GLfloat angle) {
@@ -257,4 +293,37 @@ void Media::Draw0to9Black(int num, GLfloat x, GLfloat y,
 void Media::Draw0to9White(int num, GLfloat x, GLfloat y, 
                      GLfloat scale, GLfloat angle) {
   Draw0to9(num, x, y, scale, angle, false);
+}
+
+void Media::DrawNumberBlock(GLfloat xdist, GLfloat ydist, GLfloat x, GLfloat y,
+                            GLfloat width, GLfloat height, GLfloat angle,
+                            int quad, bool black) {
+  GLfloat rad = angle * 0.01745f;
+  GLfloat a = (xdist != 0) ? atan(ydist / xdist) : 3.14159f / 2.0f;
+  GLfloat hyp = (xdist != 0) ? xdist / cos(a) : ydist;
+  GLfloat xpos = x + hyp * cos(a - rad);
+  GLfloat ypos = y - hyp * sin(a - rad);
+  switch (quad) {
+  case 2:
+    xpos = x - hyp * cos(a + rad);
+    ypos = y - hyp * sin(a + rad);
+    break;
+  case 3:
+    xpos = x - hyp * cos(a - rad);
+    ypos = y + hyp * sin(a - rad);
+    break;
+  case 4:
+    xpos = x + hyp * cos(a + rad);
+    ypos = y + hyp * sin(a + rad);
+    break;
+  default:
+    xpos = x + hyp * cos(a - rad);
+    ypos = y - hyp * sin(a - rad);
+    break;
+  }
+  if (black) {
+    DrawImage(kRectWhite, xpos, ypos, width, height, angle);
+  } else {
+    DrawImage(kRectBlack, xpos, ypos, width, height, angle);
+  }
 }

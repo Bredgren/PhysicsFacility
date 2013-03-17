@@ -14,7 +14,7 @@ const GLfloat LevelSelect::level_button_height = 86.0f;
 
 LevelSelect::LevelSelect() :
   back(nav_button_width * 0.5 + 100, 768 - nav_button_height * 0.5 - 10, 
-       nav_button_width, nav_button_height) {
+       nav_button_width, nav_button_height), level(0) {
   int padding = 100;
   int columns = (1024 - padding * 2) / level_button_width;
   int rows = (768 - padding * 2) / level_button_width;
@@ -47,9 +47,11 @@ GameState::State LevelSelect::ProcessMouse(bool left_button,
   if (left_button) {
     if (back.isSelected())
       return GameState::kMainMenu;
-    for (Button *button : levels) {
-      if (button->isSelected())
-        return GameState::kGame; // how to communicate which level?
+    for (int i = 0; i < NUM_LEVELS; ++i) {
+      if (levels[i]->isSelected()) {
+        level = i;
+        return GameState::kGame;
+      }
     }
   }
 

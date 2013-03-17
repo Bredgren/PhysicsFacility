@@ -61,6 +61,9 @@ class Media {
                   GLfloat scale, GLfloat angle, bool black);
   void Draw0to9(int num, GLfloat x, GLfloat y, 
                 GLfloat scale, GLfloat angle, bool black);
+  void DrawNumberBlock(GLfloat xdist, GLfloat ydist, GLfloat x, GLfloat y,
+                       GLfloat width, GLfloat height, GLfloat angle,
+                       int quad, bool black);
 };
 
 extern Media media;

@@ -30,13 +30,13 @@ class LevelSelect {
 
  private:
    int progress;
+   int level;
 
    Shader *shader_;
 
    Button back;
 
-   //static const int NUM_LEVELS = 5;
-   int NUM_LEVELS;
+   int NUM_LEVELS;  // 54 (0 - 53)
    std::vector<Button*> levels;
 
    static const GLfloat nav_button_width;
