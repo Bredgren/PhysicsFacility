@@ -32,7 +32,13 @@ LevelSelect::~LevelSelect() {
 bool LevelSelect::Init(Shader *shader) {
   shader_ = shader;
 
-  progress = 20;
+  std::ifstream file("progress.txt");
+  if (file.good()) {
+    file >> progress;
+  } else {
+    progress = 1;
+  }
+  file.close();
 
   return true;
 }
@@ -71,4 +77,12 @@ void LevelSelect::Draw() {
     media.DrawImage(type, levels[i]->getX(), levels[i]->getY(),
                     level_button_width, level_button_height, angle, i);
   }
+}
+
+void LevelSelect::IncrementProgress() {
+  if (progress < NUM_LEVELS)
+    progress++;
+  std::ofstream file("progress.txt");
+  file << progress;
+  file.close();
 }

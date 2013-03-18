@@ -5,10 +5,12 @@
 #ifndef PHYSICSFACILICTYGAME_LEVELSELECT_H_
 #define PHYSICSFACILICTYGAME_LEVELSELECT_H_
 
-#include <glm.hpp>
+#include <iostream>
+#include <fstream>
 #include <vector>
 
 #include <GL/glew.h>
+#include <glm.hpp>
 #include <Shaders/shader.h>
 
 #include "button.h"
@@ -27,6 +29,8 @@ class LevelSelect {
                                                    GLfloat display_y);
 
    void Draw();
+
+   void IncrementProgress();
 
  private:
    int progress;

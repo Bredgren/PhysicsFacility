@@ -86,7 +86,6 @@
     <ClInclude Include="..\..\..\Game\button.h" />
     <ClInclude Include="..\..\..\Game\glContext.h" />
     <ClInclude Include="..\..\..\Game\game_state.h" />
-    <ClInclude Include="..\..\..\Game\level_button.h" />
     <ClInclude Include="..\..\..\Game\level_select.h" />
     <ClInclude Include="..\..\..\Game\main_menu.h" />
     <ClInclude Include="..\..\..\Game\media.h" />
@@ -98,7 +97,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Game\button.cpp" />
     <ClCompile Include="..\..\..\Game\glContext.cpp" />
-    <ClCompile Include="..\..\..\Game\level_button.cpp" />
     <ClCompile Include="..\..\..\Game\level_select.cpp" />
     <ClCompile Include="..\..\..\Game\main_menu.cpp" />
     <ClCompile Include="..\..\..\Game\media.cpp" />
